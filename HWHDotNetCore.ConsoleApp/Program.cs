@@ -58,8 +58,8 @@ foreach(DataRow dr in dt.Rows)
 AdoDotNetExamples adoDotNetExamples = new AdoDotNetExamples();
 
 //adoDotNetExamples.Read();  // F11
-
-adoDotNetExamples.Create("title","autho","content");
+//adoDotNetExamples.Create("title","autho","content");
+adoDotNetExamples.Update(10, "test title", "test author", "test content");
 
 Console.ReadLine();
 

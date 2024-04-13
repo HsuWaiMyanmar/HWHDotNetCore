@@ -98,6 +98,30 @@ namespace HWHDotNetCore.ConsoleApp
         public void Update (int id,string title, string author , string content)
         {
 
+            SqlConnection connection = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
+            connection.Open();
+
+            string query = @"UPDATE [dbo].[Tbl_Blog]
+   SET [BlogTitle] = @BlogTitle
+      ,[BlogAuthor] = @BlogAuthor
+      ,[BlogContent] = @BlogContent
+ WHERE BlogId = @BlogID";
+
+            SqlCommand cmd = new SqlCommand(query, connection);  // SQL Injection to Find
+            cmd.Parameters.AddWithValue("@BlogId", id);
+            cmd.Parameters.AddWithValue("@BlogTitle", title);
+            cmd.Parameters.AddWithValue("@BlogAuthor", author);
+            cmd.Parameters.AddWithValue("@BlogContent", content);
+
+            int result = cmd.ExecuteNonQuery();
+
+
+
+            connection.Close();
+
+            string message = result > 0 ? "Updating Successful." : "Updating Failed";
+
+
         }
     }
 }
