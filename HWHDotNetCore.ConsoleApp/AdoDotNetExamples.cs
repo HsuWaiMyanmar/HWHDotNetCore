@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection.Metadata;
 
 namespace HWHDotNetCore.ConsoleApp
 {
@@ -20,6 +21,48 @@ namespace HWHDotNetCore.ConsoleApp
            Password = "sa@123"
 
         };
+
+
+        public void Edit(int id)
+        {
+
+            SqlConnection connection = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
+
+            connection.Open();
+            Console.WriteLine("Connection Open");
+
+            String query = "select * from Tbl_Blog where BlogId  = @BlogId";
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+
+            cmd.Parameters.AddWithValue("@BlogId", id);    
+
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(cmd);
+
+            DataTable dt = new DataTable();
+
+            sqlDataAdapter.Fill(dt);
+
+
+            if (dt.Rows.Count == 0)
+            {
+                Console.WriteLine("Not data found");
+                return;
+            }
+
+            DataRow dr = dt.Rows[0];
+
+                Console.WriteLine("Blog Id =>" + dr["BlogId"]);
+                Console.WriteLine("Blog Title =>" + dr["BlogTitle"]);
+                Console.WriteLine("Blog Author =>" + dr["BlogAuthor"]);
+                Console.WriteLine("Blog Content =>" + dr["BlogContent"]);
+                Console.WriteLine("-----------------------------");
+
+            connection.Close();
+
+
+
+        }
 
         public void Read()
         {
@@ -102,10 +145,10 @@ namespace HWHDotNetCore.ConsoleApp
             connection.Open();
 
             string query = @"UPDATE [dbo].[Tbl_Blog]
-   SET [BlogTitle] = @BlogTitle
+         SET [BlogTitle] = @BlogTitle
       ,[BlogAuthor] = @BlogAuthor
       ,[BlogContent] = @BlogContent
- WHERE BlogId = @BlogID";
+         WHERE BlogId = @BlogID";
 
             SqlCommand cmd = new SqlCommand(query, connection);  // SQL Injection to Find
             cmd.Parameters.AddWithValue("@BlogId", id);
@@ -120,6 +163,31 @@ namespace HWHDotNetCore.ConsoleApp
             connection.Close();
 
             string message = result > 0 ? "Updating Successful." : "Updating Failed";
+
+
+        }
+
+
+
+        public void Delete (int id)
+        {
+
+            SqlConnection connection = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
+            connection.Open();
+
+            string query = @"DELETE FROM [dbo].[Tbl_Blog]
+      WHERE BlogId = @BlogId";
+
+            SqlCommand cmd = new SqlCommand(query, connection);  // SQL Injection to Find
+            cmd.Parameters.AddWithValue("@BlogId", id);
+           
+            int result = cmd.ExecuteNonQuery();
+
+
+
+            connection.Close();
+
+            string message = result > 0 ? "Delete Successful." : "Delete Failed";
 
 
         }

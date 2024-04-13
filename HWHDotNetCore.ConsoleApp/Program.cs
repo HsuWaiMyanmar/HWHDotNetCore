@@ -59,8 +59,12 @@ AdoDotNetExamples adoDotNetExamples = new AdoDotNetExamples();
 
 //adoDotNetExamples.Read();  // F11
 //adoDotNetExamples.Create("title","autho","content");
-adoDotNetExamples.Update(10, "test title", "test author", "test content");
+//adoDotNetExamples.Update(10, "test title", "test author", "test content");
 
+//adoDotNetExamples.Delete(10);
+
+adoDotNetExamples.Edit(10);
+adoDotNetExamples.Edit(2);
 Console.ReadLine();
 
 
