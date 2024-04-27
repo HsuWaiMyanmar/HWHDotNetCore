@@ -13,6 +13,8 @@ namespace HWHDotNetCore.ConsoleApp.EFCoreExamples
     {
         private readonly AppDbContext db = new AppDbContext();
 
+
+
         public void Run()
         {
             //Edit(9);
