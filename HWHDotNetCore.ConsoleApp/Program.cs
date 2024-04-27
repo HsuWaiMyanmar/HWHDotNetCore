@@ -1,4 +1,4 @@
-﻿using HWHDotNetCore.ConsoleApp;
+﻿using HWHDotNetCore.ConsoleApp.EFCoreExamples;
 using System.Data;
 using System.Data.SqlClient;
 

@@ -7,18 +7,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection.Metadata;
 
-namespace HWHDotNetCore.ConsoleApp
+namespace HWHDotNetCore.ConsoleApp.AdoDotNetExample
 {
     internal class AdoDotNetExamples
     {
 
-        private readonly SqlConnectionStringBuilder _sqlConnectionStringBuilder= new SqlConnectionStringBuilder()
+        private readonly SqlConnectionStringBuilder _sqlConnectionStringBuilder = new SqlConnectionStringBuilder()
         {
 
-           DataSource = "DESKTOP-87SLOG3",
-           InitialCatalog = "DotNetTrainingBatch4",
-           UserID = "sa",
-           Password = "sa@123"
+            DataSource = "DESKTOP-87SLOG3",
+            InitialCatalog = "DotNetTrainingBatch4",
+            UserID = "sa",
+            Password = "sa@123"
 
         };
 
@@ -31,11 +31,11 @@ namespace HWHDotNetCore.ConsoleApp
             connection.Open();
             Console.WriteLine("Connection Open");
 
-            String query = "select * from Tbl_Blog where BlogId  = @BlogId";
+            string query = "select * from Tbl_Blog where BlogId  = @BlogId";
 
             SqlCommand cmd = new SqlCommand(query, connection);
 
-            cmd.Parameters.AddWithValue("@BlogId", id);    
+            cmd.Parameters.AddWithValue("@BlogId", id);
 
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(cmd);
 
@@ -52,11 +52,11 @@ namespace HWHDotNetCore.ConsoleApp
 
             DataRow dr = dt.Rows[0];
 
-                Console.WriteLine("Blog Id =>" + dr["BlogId"]);
-                Console.WriteLine("Blog Title =>" + dr["BlogTitle"]);
-                Console.WriteLine("Blog Author =>" + dr["BlogAuthor"]);
-                Console.WriteLine("Blog Content =>" + dr["BlogContent"]);
-                Console.WriteLine("-----------------------------");
+            Console.WriteLine("Blog Id =>" + dr["BlogId"]);
+            Console.WriteLine("Blog Title =>" + dr["BlogTitle"]);
+            Console.WriteLine("Blog Author =>" + dr["BlogAuthor"]);
+            Console.WriteLine("Blog Content =>" + dr["BlogContent"]);
+            Console.WriteLine("-----------------------------");
 
             connection.Close();
 
@@ -72,7 +72,7 @@ namespace HWHDotNetCore.ConsoleApp
             connection.Open();
             Console.WriteLine("Connection Open");
 
-            String query = "select * from Tbl_Blog";
+            string query = "select * from Tbl_Blog";
 
             SqlCommand cmd = new SqlCommand(query, connection);
 
@@ -107,7 +107,7 @@ namespace HWHDotNetCore.ConsoleApp
         }
 
 
-        public void Create(string title , string author , string content)
+        public void Create(string title, string author, string content)
         {
 
             SqlConnection connection = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
@@ -124,10 +124,10 @@ namespace HWHDotNetCore.ConsoleApp
           
            )";
 
-            SqlCommand cmd = new SqlCommand(query,connection);  // SQL Injection to Find
-            cmd.Parameters.AddWithValue("@BlogTitle",title);
+            SqlCommand cmd = new SqlCommand(query, connection);  // SQL Injection to Find
+            cmd.Parameters.AddWithValue("@BlogTitle", title);
             cmd.Parameters.AddWithValue("@BlogAuthor", author);
-            cmd.Parameters.AddWithValue("@BlogContent",content);
+            cmd.Parameters.AddWithValue("@BlogContent", content);
 
             int result = cmd.ExecuteNonQuery();
 
@@ -135,10 +135,10 @@ namespace HWHDotNetCore.ConsoleApp
 
             connection.Close();
 
-            string message = result >0 ? "Saving Successful." : "Saving Failed";
+            string message = result > 0 ? "Saving Successful." : "Saving Failed";
         }
 
-        public void Update (int id,string title, string author , string content)
+        public void Update(int id, string title, string author, string content)
         {
 
             SqlConnection connection = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
@@ -169,7 +169,7 @@ namespace HWHDotNetCore.ConsoleApp
 
 
 
-        public void Delete (int id)
+        public void Delete(int id)
         {
 
             SqlConnection connection = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
@@ -180,7 +180,7 @@ namespace HWHDotNetCore.ConsoleApp
 
             SqlCommand cmd = new SqlCommand(query, connection);  // SQL Injection to Find
             cmd.Parameters.AddWithValue("@BlogId", id);
-           
+
             int result = cmd.ExecuteNonQuery();
 
 
