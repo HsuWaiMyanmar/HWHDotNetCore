@@ -66,9 +66,13 @@ foreach(DataRow dr in dt.Rows)
 //adoDotNetExamples.Edit(10);
 //adoDotNetExamples.Edit(2);
 
-DapperExample dapperExample = new DapperExample();
+//DapperExample dapperExample = new DapperExample();
 
-dapperExample.Run();
+//dapperExample.Run();
+
+
+EFCoreExample eFCoreExample = new EFCoreExample();  
+eFCoreExample.Run();
 Console.ReadLine();
 
 
